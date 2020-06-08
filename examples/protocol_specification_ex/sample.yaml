@@ -1,0 +1,56 @@
+---
+name: two_party_negotiation
+author: fetchai
+version: 0.1.0
+description: A protocol for negotiation over a fixed set of resources involving two parties.
+license: Apache-2.0
+aea_version: '>=0.3.0, <0.4.0'
+speech_acts:
+  cfp:
+    query: ct:Query
+  propose:
+    number: pt:int
+    price: pt:float
+    description: ct:Description
+    flag: pt:bool
+    query: ct:Query
+    proposal: pt:optional[pt:dict[pt:str, pt:str]]
+    rounds: pt:set[pt:int]
+    items: pt:list[pt:str]
+    conditions: pt:optional[pt:union[pt:str, pt:dict[pt:str,pt:int], pt:set[pt:str], pt:dict[pt:str, pt:float]]]
+  request:
+    method: pt:str
+    url: pt:str
+    version: pt:str
+    headers: pt:str
+    bodyy: pt:optional[pt:bytes]
+  accept: {}
+  inform:
+    inform_number: pt:list[pt:int]
+  inform_reply:
+    reply_message: pt:dict[pt:int, pt:str]
+  decline: {}
+  match_accept: {}
+...
+---
+ct:Query: |
+  message Nothing {
+  }
+  oneof query{
+      bytes bytes = 1;
+      Nothing nothing = 2;
+      bytes query_bytes = 3;
+  }
+ct:Description: |
+  bytes description = 1;
+...
+---
+reply:
+  cfp: [propose, decline]
+  propose: [accept, decline]
+  accept: [decline, match_accept]
+  decline: []
+  match_accept: []
+roles: {buyer, seller}
+end_states: [successful, failed]
+...

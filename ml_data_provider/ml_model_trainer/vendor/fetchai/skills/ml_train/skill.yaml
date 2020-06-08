@@ -1,0 +1,53 @@
+name: ml_train
+author: fetchai
+version: 0.3.0
+description: The ml train and predict skill implements a simple skill which buys training
+  data, trains a model and sells predictions.
+license: Apache-2.0
+aea_version: '>=0.3.0, <0.4.0'
+fingerprint:
+  __init__.py: QmbQigh7SV7dD2hLTGv3k9tnvpYWN1otG5yjiM7F3bbGEQ
+  behaviours.py: QmZ3DVQn4DYnmxxXnKm8NE3Ey8q1BEDJot31yiau13BLV4
+  handlers.py: QmXAPxN914xHPrjFUnmvaJvbyThtig5dCXZ1U76J34wTjE
+  model.json: QmdV2tGrRY6VQ5VLgUa4yqAhPDG6X8tYsWecypq8nox9Td
+  model.py: QmS2o3zp1BZMnZMci7EHrTKhoD1dVToy3wrPTbMU7YHP9h
+  strategy.py: Qmc7UAYYhXERsTCJBKYg3p7toa7HEfnzxZtA2H8xcYPc53
+  tasks.py: QmS5pGbxvMXSh1Vmuvq26e5APnheQJJ3r3BK6GEyUBUpAf
+fingerprint_ignore_patterns: []
+contracts: []
+protocols:
+- fetchai/ml_trade:0.1.0
+- fetchai/oef_search:0.1.0
+behaviours:
+  search:
+    args:
+      search_interval: 10
+    class_name: MySearchBehaviour
+handlers:
+  oef:
+    args: {}
+    class_name: OEFSearchHandler
+  train:
+    args: {}
+    class_name: TrainHandler
+  transaction:
+    args: {}
+    class_name: MyTransactionHandler
+models:
+  ml_model:
+    args:
+      model_config_path: ./skills/ml_train/model.json
+    class_name: MLModel
+  strategy:
+    args:
+      currency_id: FET
+      dataset_id: fmnist
+      is_ledger_tx: true
+      ledger_id: fetchai
+      max_buyer_tx_fee: 20
+      max_unit_price: 70
+    class_name: Strategy
+dependencies:
+  numpy: {}
+  tensorflow:
+    version: ==1.14.0

@@ -1,0 +1,26 @@
+---
+name: default
+author: fetchai
+version: 0.1.0
+description: A protocol for exchanging any bytes message.
+license: Apache-2.0
+aea_version: '>=0.3.0, <0.4.0'
+speech_acts:
+  bytes:
+    content: pt:bytes
+  error:
+    error_code: ct:ErrorCode
+    error_msg: pt:str
+    error_data: pt:dict[pt:str, pt:bytes]
+...
+---
+ct:ErrorCode: |
+  enum ErrorCodeEnum {
+      UNSUPPORTED_PROTOCOL = 0;
+      DECODING_ERROR = 1;
+      INVALID_MESSAGE = 2;
+      UNSUPPORTED_SKILL = 3;
+      INVALID_DIALOGUE = 4;
+    }
+  ErrorCodeEnum error_code = 1;
+...

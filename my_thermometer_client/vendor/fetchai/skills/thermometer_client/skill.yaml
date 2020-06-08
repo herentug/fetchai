@@ -1,0 +1,48 @@
+name: thermometer_client
+author: fetchai
+version: 0.2.0
+description: The thermometer client skill implements the skill to purchase temperature
+  data.
+license: Apache-2.0
+aea_version: '>=0.3.0, <0.4.0'
+fingerprint:
+  __init__.py: QmNkZAetyctaZCUf6ACxP5onGWsSxu2hjSNoFmJ3ta6Lta
+  behaviours.py: QmZHKXwPeCngdveHR4syA7zRmdvtgcNqdXk7SUyDxS94ud
+  dialogues.py: QmbUgDgUGfEMe4tsG96cvZ6UVQ7orVv2LZBzJEF25B62Yj
+  handlers.py: QmdqnzMzBZsqyZkMzRimMBMEoAfpyULm9nACcwiVsYVihy
+  strategy.py: QmYwypsndrFexLwHSeJ4kbyez3gbB4VCAcV53UzDjtvwti
+fingerprint_ignore_patterns: []
+contracts: []
+protocols:
+- fetchai/default:0.1.0
+- fetchai/fipa:0.2.0
+- fetchai/oef_search:0.1.0
+behaviours:
+  search:
+    args:
+      search_interval: 5
+    class_name: MySearchBehaviour
+handlers:
+  fipa:
+    args: {}
+    class_name: FIPAHandler
+  oef:
+    args: {}
+    class_name: OEFSearchHandler
+  transaction:
+    args: {}
+    class_name: MyTransactionHandler
+models:
+  dialogues:
+    args: {}
+    class_name: Dialogues
+  strategy:
+    args:
+      country: UK
+      currency_id: FET
+      is_ledger_tx: true
+      ledger_id: fetchai
+      max_row_price: 4
+      max_tx_fee: 2000000
+    class_name: Strategy
+dependencies: {}

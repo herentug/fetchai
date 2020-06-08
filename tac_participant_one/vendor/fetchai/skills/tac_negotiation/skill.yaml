@@ -1,0 +1,64 @@
+name: tac_negotiation
+author: fetchai
+version: 0.1.0
+description: The tac negotiation skill implements the logic for an AEA to do fipa
+  negotiation in the TAC.
+license: Apache-2.0
+aea_version: '>=0.3.0, <0.4.0'
+fingerprint:
+  __init__.py: QmcgZLvHebdfocqBmbu6gJp35khs6nbdbC649jzUyS86wy
+  behaviours.py: QmY93hH9A7jrMvv7mZ24PnsP6Pmhc73aSoSNfDh16AwQe1
+  dialogues.py: QmSVqtbxZvy3R5oJXATHpkjnNekMqHbPY85dTf3f6LqHYs
+  handlers.py: QmZ4uQtch2vGEUb6Mq7i9yHTymheE4iDCD2sWAivjmxtEe
+  helpers.py: QmXYbZYtLdJLrc7pCmmkHfEzBUeqm1sYQGEY2UNKsFKb8A
+  registration.py: QmexnkCCmyiFpzM9bvXNj5uQuxQ2KfBTUeMomuGN9ccP7g
+  search.py: QmSTtMm4sHUUhUFsQzufHjKihCEVe5CaU5MGjhzSdPUzDT
+  strategy.py: Qme19rn8NazeYWykH7m3L9hjZNpLQ53pssj1RrctYLdQ9f
+  tasks.py: QmbAUngTeyH1agsHpzryRQRFMwoWDmymaQqeKeC3TZCPFi
+  transactions.py: QmVR16KesbZEH4xDeToacGpyfv3SapSg9S4VakhVcriAx1
+fingerprint_ignore_patterns: []
+contracts:
+- fetchai/erc1155:0.3.0
+protocols:
+- fetchai/fipa:0.2.0
+- fetchai/oef_search:0.1.0
+behaviours:
+  clean_up:
+    args:
+      tick_interval: 5.0
+    class_name: TransactionCleanUpBehaviour
+  tac_negotiation:
+    args: {}
+    class_name: GoodsRegisterAndSearchBehaviour
+handlers:
+  fipa:
+    args: {}
+    class_name: FIPANegotiationHandler
+  oef:
+    args: {}
+    class_name: OEFSearchHandler
+  transaction:
+    args: {}
+    class_name: TransactionHandler
+models:
+  dialogues:
+    args: {}
+    class_name: Dialogues
+  registration:
+    args:
+      update_interval: 5
+    class_name: Registration
+  search:
+    args:
+      search_interval: 5
+    class_name: Search
+  strategy:
+    args:
+      register_as: both
+      search_for: both
+    class_name: Strategy
+  transactions:
+    args:
+      pending_transaction_timeout: 30
+    class_name: Transactions
+dependencies: {}

@@ -1,0 +1,24 @@
+---
+name: gym
+author: fetchai
+version: 0.1.0
+description: A protocol for interacting with a gym connection.
+license: Apache-2.0
+aea_version: '>=0.3.0, <0.4.0'
+speech_acts:
+  act:
+    action: ct:AnyObject
+    step_id: pt:int
+  percept:
+    step_id: pt:int
+    observation: ct:AnyObject
+    reward: pt:float
+    done: pt:bool
+    info: ct:AnyObject
+  reset: {}
+  close: {}
+...
+---
+ct:AnyObject: |
+  bytes any = 1;
+...
